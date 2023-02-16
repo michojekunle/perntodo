@@ -9,8 +9,6 @@ descriptionEl.addEventListener('change', e => {
     description = e.target.value;
 });
 
-
-
   //edit description function
   const updateDescription = async (description, todo_id) => {
     console.log(document.querySelector(`#modal-input${todo_id}`).value);
@@ -33,7 +31,6 @@ descriptionEl.addEventListener('change', e => {
     }
   };
 
-
   const onSubmitForm = async e => {
     e.preventDefault();
     try {
@@ -50,11 +47,7 @@ descriptionEl.addEventListener('change', e => {
     }
   };
 
-
-
-
   //delete todo function
-
   const deleteTodo = async id => {
     try {
       const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
@@ -122,7 +115,6 @@ const refreshTodos = (todos) => {
                                         type="text"
                                         class="form-control"
                                         id='modal-input${todo.todo_id}'
-                                        onChange="setDescription(e)"
                                     />
                                     </div>
                         
@@ -177,8 +169,3 @@ console.log(todos);
 refreshTodos(todos);
 
 form.addEventListener('submit', onSubmitForm);
-
-function setDescription(e) {
-    description = e.target.value;
-    alert(description);
-}
