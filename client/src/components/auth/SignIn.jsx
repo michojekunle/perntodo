@@ -3,7 +3,29 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   
+  async function handleSignIn() {
+    try {
+      const body = {email, password}
+      const res = await fetch('http://localhost:3000/signin', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+      const data = res.json();
+
+      if(data.session){
+        navigate('/')
+      } else {
+        alert("Error Signing you in...");
+      }
+    } catch (err) {
+        console.error(err.message);
+    }
+  }
+
   async function validateUser() {
     try {
       const res = await fetch('http://localhost:5000/validateUser')
@@ -20,6 +42,7 @@ const SignIn = () => {
   useEffect(() => {
     validateUser();
   }, []);
+  
   return (
     <div>
         
