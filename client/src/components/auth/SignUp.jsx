@@ -45,7 +45,7 @@ const SignUp = () => {
   return (
     <div>
         
-        <small>Don't have an account... <Link to='/signup'>Sign Up</Link></small>
+        <small>Have an account... <Link to='/signin'>Sign In</Link></small>
     </div>
   )
 }
