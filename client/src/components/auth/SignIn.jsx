@@ -6,10 +6,11 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  async function handleSignIn() {
+  async function handleSignIn(e) {
+    e.preventDefault();
     try {
       const body = {email, password}
-      const res = await fetch('http://localhost:3000/signin', {
+      const res = await fetch('http://localhost:5000/signin', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
@@ -44,7 +45,8 @@ const SignIn = () => {
   }, []);
   
   return (
-    <div>
+    <div className='container'>
+        <h1 className='text-center mt-4'>Sign In</h1>
         <form onSubmit={handleSignIn}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
@@ -56,7 +58,7 @@ const SignIn = () => {
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
-        <small>Don't have an account... <Link to='/signup'>Sign Up</Link></small>
+        <p className='text-center mt-3'>Don't have an account... <Link to='/signup'>Sign Up</Link></p>
     </div>
   )
 }

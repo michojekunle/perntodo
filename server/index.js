@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 //sign Up
 app.post('/signup', (req, res) => {
     const { email, password } = req.body;
-    if(!email && !password){
+    if(!email || !password){
         res.status(400).json({ msg: "All fields Required!!" })
     } else {
         // Check if User Already Exists
@@ -54,7 +54,7 @@ app.post('/signup', (req, res) => {
 // Sign In
 app.post('/signin', (req, res) => {
     const { email, password } = req.body;
-    if(!email && !password) {
+    if(!email || !password) {
         res.status(400).json({ msg: "All Fields Required" });
     } else {
         // Validate User
