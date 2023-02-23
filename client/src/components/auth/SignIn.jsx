@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const SignIn = () => {
+const SignIn = ({setUserSession}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,11 +13,15 @@ const SignIn = () => {
       const res = await fetch('http://localhost:5000/signin', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
+        credentials: 'include'
       });
-      const data = res.json();
+      const data = await res.json();
 
+      console.log("DATA", data);
       if(data.session){
+        localStorage.setItem('user_id', data.session.user_id);
+        
         navigate('/')
       } else {
         alert("Error Signing you in...");
@@ -27,21 +31,8 @@ const SignIn = () => {
     }
   }
 
-  async function validateUser() {
-    try {
-      const res = await fetch('http://localhost:5000/validateUser')
-      const data = await res.json();
-      console.log(data);
-      if(data.session){
-        navigate('/');
-      }
-    } catch (err) {
-        console.error(err.message);     
-    }
-  }
-
   useEffect(() => {
-    validateUser();
+    console.log("Hello World")
   }, []);
   
   return (

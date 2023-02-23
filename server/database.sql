@@ -1,7 +1,18 @@
 CREATE DATABASE perntodo;
 
 CREATE TABLE todos(
-    id SERIAL PRIMARY KEY,
-    description VARCHAR(255)
+    todo_id SERIAL PRIMARY KEY,
+    description VARCHAR(255),
+    email VARCHAR(255)
+);
+
+CREATE TABLE login(
+    email VARCHAR(255),
+    hash VARCHAR(255)
+);
+
+CREATE TABLE users(
+    user_id SERIAL PRIMARY KEY,
+    email VARCHAR(255)
 );
 
