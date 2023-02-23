@@ -25,15 +25,12 @@ app.use(session({
     cookie: { secure: true, maxAge: MAX_AGE }
 }));
 
-console.log(session.Cookie);
-
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-const Users = [];
 // ROUTES
 
 // AUTH FOR TODO
@@ -64,6 +61,7 @@ app.post('/signup', async (req, res) => {
             const hash = bcrypt.hashSync(password);
             
             try {
+                //transaction 
                 await client.query('BEGIN')
                 const response = await client.query('INSERT INTO login(email, hash) VALUES($1, $2) RETURNING email', [email, hash]);
             
