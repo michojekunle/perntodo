@@ -6,6 +6,8 @@ CREATE TABLE todos(
     email VARCHAR(255)
 );
 
+ALTER TABLE todos ADD COLUMN email VARCHAR(255);
+
 CREATE TABLE login(
     email VARCHAR(255),
     hash VARCHAR(255)

@@ -14,7 +14,7 @@ const Home = () => {
     const user_id = localStorage.getItem("user_id");
     console.log(user_id);
     if (user_id !== 'null' && user_id !== null ) {
-      fetch(`http://localhost:5000/user/${user_id}`)
+      fetch(`http://localhost:5002/user/${user_id}`)
       .then(res => res.json())
       .then(data => {
        console.log(data);

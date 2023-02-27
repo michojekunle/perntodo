@@ -17,7 +17,7 @@ descriptionEl.addEventListener('change', e => {
     try {
       const body = { description };
       const response = await fetch(
-        `http://localhost:5000/todos/${todo_id}`,
+        `http://localhost:5002/todos/${todo_id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ descriptionEl.addEventListener('change', e => {
     e.preventDefault();
     try {
       const body = { description };
-      const response = await fetch("http://localhost:5000/todos", {
+      const response = await fetch("http://localhost:5002/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
@@ -50,7 +50,7 @@ descriptionEl.addEventListener('change', e => {
   //delete todo function
   const deleteTodo = async id => {
     try {
-      const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
+      const deleteTodo = await fetch(`http://localhost:5002/todos/${id}`, {
         method: "DELETE"
       });
 
@@ -66,7 +66,7 @@ descriptionEl.addEventListener('change', e => {
 
 const getTodos = async () => {
     try {
-        const response = await fetch("http://localhost:5000/todos");
+        const response = await fetch("http://localhost:5002/todos");
         const jsonData = await response.json();
 
         todos = await jsonData;

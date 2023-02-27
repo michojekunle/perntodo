@@ -9,7 +9,7 @@ const InputTodo = ({userSession}) => {
       const email = userSession?.email;
       console.log(email);
       const body = { description, email };
-      const response = await fetch("http://localhost:5000/todos", {
+      const response = await fetch("http://localhost:5002/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)

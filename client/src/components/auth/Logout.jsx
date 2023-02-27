@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Logout = () => {
     const navigate = useNavigate();
     const handleLogOut = () => {
-        fetch('http://localhost:5000/logout')
+        fetch('http://localhost:5002/logout')
         .then(res => res.json())
         .then(async data => {
             console.log(data)

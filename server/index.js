@@ -25,15 +25,14 @@ app.use(session({
     cookie: { secure: true, maxAge: MAX_AGE }
 }));
 
-console.log(session.Cookie);
 
+// app.use(cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-const Users = [];
 // ROUTES
 
 // AUTH FOR TODO
@@ -45,8 +44,7 @@ app.post('/signup', async (req, res) => {
     if(!email || !password){
         res.status(400).json({ msg: "All fields Required!!" });
         console.log("Error All fields required...")
-    } else {
-        
+    } else {       
         // Check if User Already Exists
         let found = false;
         const users = (await pool.query("SELECT * FROM users")).rows;
@@ -77,55 +75,54 @@ app.post('/signup', async (req, res) => {
             } finally {
                 client.release()
             }
-            
         }
     }
 })
 
-// Sign In
-app.post('/signin', async (req, res) => {
-    const { email, password } = req.body;
-    if(!email || !password) {
-        res.status(400).json({ msg: "All Fields Required" });
-    } else {
-        // Check if user Exists
-        let isFound = false;
-        const logIn = await pool.query('SELECT * FROM login'); 
-        logIn.rows.forEach(async user => {
-            if(user.email === email){
-                isFound = true;
-                const isValid = bcrypt.compareSync(password, user.hash);
-                if(isValid){
-                    const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-                    console.log(user.rows[0]);
-                    res.status(200).json({msg: "User Logged In Succefully...", session: user.rows[0]});
-                } else {
-                    res.status(403).json({ msg: "Error, Invalid Details, User Not Found..." });
-                }
-            }
-        })
-        if(!isFound) {
-            res.status(403).json({ msg: "Error, Invalid Details, User Not Found..." });
-        }
-    }
-})
+// // Sign In
+// app.post('/signin', async (req, res) => {
+//     const { email, password } = req.body;
+//     if(!email || !password) {
+//         res.status(400).json({ msg: "All Fields Required" });
+//     } else {
+//         // Check if user Exists
+//         let isFound = false;
+//         const logIn = await pool.query('SELECT * FROM login'); 
+//         logIn.rows.forEach(async user => {
+//             if(user.email === email){
+//                 isFound = true;
+//                 const isValid = bcrypt.compareSync(password, user.hash);
+//                 if(isValid){
+//                     const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+//                     console.log(user.rows[0]);
+//                     res.status(200).json({msg: "User Logged In Succefully...", session: user.rows[0]});
+//                 } else {
+//                     res.status(403).json({ msg: "Error, Invalid Details, User Not Found..." });
+//                 }
+//             }
+//         })
+//         if(!isFound) {
+//             res.status(403).json({ msg: "Error, Invalid Details, User Not Found..." });
+//         }
+//     }
+// })
 
-app.get('/user/:user_id', async (req, res) => {
-    const { user_id } = req.params;
-    const user = await pool.query("SELECT * FROM users WHERE user_id = $1", [user_id]);
-    req.session.user = user.rows[0];
-    console.log(user.rows);
-    res.status(200).json({ msg: "User logged In", session: req.session.user });
-})
+// app.get('/user/:user_id', async (req, res) => {
+//     const { user_id } = req.params;
+//     const user = await pool.query("SELECT * FROM users WHERE user_id = $1", [user_id]);
+//     req.session.user = user.rows[0];
+//     console.log(user.rows);
+//     res.status(200).json({ msg: "User logged In", session: req.session.user });
+// })
 
 
-// log out route 
-app.get('/logout', (req, res) => {
-    req.session.destroy(() => {
-        console.log("User Logged Out.");
-    })
-    res.status(200).json({ msg: "Use Logged out", session: {} });
-})
+// // log out route 
+// app.get('/logout', (req, res) => {
+//     req.session.destroy(() => {
+//         console.log("User Logged Out.");
+//     })
+//     res.status(200).json({ msg: "Use Logged out", session: {} });
+// })
 
 // CRUD FOR TODO
 //create a todo
@@ -195,7 +192,7 @@ app.delete('/todos/:id', async (req, res) => {
 })
 
 //SERVER
-const PORT = 5000;
+const PORT = 5002;
 
 app.listen(PORT, () => {
     console.log("App is listening on port", PORT);

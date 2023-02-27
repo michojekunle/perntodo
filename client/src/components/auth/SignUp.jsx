@@ -10,7 +10,7 @@ const SignUp = ({setUserSession}) => {
     e.preventDefault();
     try {
       const body = {email, password}
-      const res = await fetch('http://localhost:5000/signup', {
+      const res = await fetch('http://localhost:5002/signup', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
