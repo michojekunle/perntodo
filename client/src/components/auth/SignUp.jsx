@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 
-const SignUp = ({setUserSession}) => {
+const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,11 +38,27 @@ const SignUp = ({setUserSession}) => {
         <form onSubmit={handleSignUp}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
-            <input type="email" value={email} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name='email' onChange={e => setEmail(e.target.value)}/>
+            <input 
+              type="email" 
+              value={email} 
+              className="form-control" 
+              id="exampleInputEmail1" 
+              aria-describedby="emailHelp" 
+              placeholder="Enter email" 
+              name='email' 
+              onChange={e => setEmail(e.target.value)}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="exampleInputPassword1">Password</label>
-            <input type="password" value={password} className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+            <input 
+              type="password" 
+              value={password} 
+              className="form-control" 
+              id="exampleInputPassword1" 
+              placeholder="Password" 
+              onChange={e => setPassword(e.target.value)}
+            />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
