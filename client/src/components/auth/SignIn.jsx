@@ -19,21 +19,19 @@ const SignIn = () => {
       const data = await res.json();
 
       console.log("DATA", data);
+
       if(data.session){
         localStorage.setItem('user_id', data.session.user_id);
         
         navigate('/')
       } else {
         alert("Error Signing you in...");
+        alert(data?.msg);
       }
     } catch (err) {
         console.error(err.message);
     }
   }
-
-  useEffect(() => {
-    console.log("Hello World")
-  }, []);
   
   return (
     <div className='container'>

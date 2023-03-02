@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import InputTodo from '../InputTodo'
 import ListTodos from '../ListTodos'
-import { useNavigate } from 'react-router-dom';
 import Logout from './Logout';
 
 const Home = () => {
   const [ userSession, setuserSession ] = useState({});
   const navigate = useNavigate();
-  let session = {};
 
   useEffect(() => {
 
     const user_id = localStorage.getItem("user_id");
     console.log(user_id);
+
     if (user_id !== 'null' && user_id !== null ) {
       fetch(`http://localhost:5002/user/${user_id}`)
       .then(res => res.json())
@@ -27,10 +27,6 @@ const Home = () => {
     navigate('/signin');
   }
 }, [localStorage.getItem("user_id")]);
-
-  console.log(userSession);
-  console.log(userSession);
-  console.log(userSession);
 
   return (
     <div className="container">
