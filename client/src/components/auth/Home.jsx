@@ -17,7 +17,7 @@ const Home = () => {
       fetch(`http://localhost:5002/user/${user_id}`)
       .then(res => res.json())
       .then(data => {
-       console.log(data);
+       console.log(data);lll
        if(data.session){
         setuserSession(data.session);
       }
