@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { BASE_URL } from '../constant';
 
 const InputTodo = ({userSession}) => {
   const [description, setDescription] = useState("");
@@ -9,7 +10,7 @@ const InputTodo = ({userSession}) => {
       const email = userSession?.email;
       console.log(email);
       const body = { description, email };
-      const response = await fetch("http://localhost:5002/todos", {
+      const response = await fetch(`${BASE_URL}/todos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)

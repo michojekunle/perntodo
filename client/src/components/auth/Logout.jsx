@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../constant';
+
 
 const Logout = () => {
     const navigate = useNavigate();
     const handleLogOut = () => {
-        fetch('http://localhost:5002/logout')
+        fetch(`${BASE_URL}/logout`)
         .then(res => res.json())
         .then(async data => {
             console.log(data)

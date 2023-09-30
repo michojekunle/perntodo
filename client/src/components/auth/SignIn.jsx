@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { BASE_URL } from '../../constant';
+
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ const SignIn = () => {
     e.preventDefault();
     try {
       const body = {email, password}
-      const res = await fetch('http://localhost:5002/signin', {
+      const res = await fetch(`${BASE_URL}/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

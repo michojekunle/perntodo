@@ -4,6 +4,9 @@ import InputTodo from '../InputTodo'
 import ListTodos from '../ListTodos'
 import Logout from './Logout';
 
+import { BASE_URL } from '../../constant';
+
+
 const Home = () => {
   const [ userSession, setuserSession ] = useState({});
   const navigate = useNavigate();
@@ -14,7 +17,7 @@ const Home = () => {
     console.log(user_id);
 
     if (user_id !== 'null' && user_id !== null ) {
-      fetch(`http://localhost:5002/user/${user_id}`)
+      fetch(`${BASE_URL}/user/${user_id}`)
       .then(res => res.json())
       .then(data => {
        console.log(data);
