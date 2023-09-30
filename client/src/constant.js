@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://perntodo-backend-ppfz.onrender.com/';
+export const BASE_URL = 'https://perntodo-backend-ppfz.onrender.com';
