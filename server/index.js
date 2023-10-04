@@ -8,11 +8,18 @@ const cors = require('cors');
 const bcrypt = require('bcrypt-nodejs')
 const pool = require('./db');
 
+const whitelist = ['http://localhost:3000', 'https://perntodo-eight.vercel.app']
 
 const corsOptions = {
-    origin: 'http://localhost:3000',  //Your Client, do not write '*'
-    credentials: true,
-};
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true,
+}
 
 const MAX_AGE = 1000 * 60 * 60 * 3;
 
