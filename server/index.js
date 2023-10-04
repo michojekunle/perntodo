@@ -39,7 +39,7 @@ app.use(session({
 
 
 // app.use(cors(corsOptions));
-app.use(cors(corsOptionsDelegate);
+app.use(cors(corsOptionsDelegate));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
