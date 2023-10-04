@@ -11,7 +11,7 @@ const pool = require('./db');
 const whitelist = ['http://localhost:3000', 'https://perntodo-eight.vercel.app']
 
 const corsOptionsDelegate = (req, callback) => {
-  let corsOption = {
+  let corsOptions = {
     origin: true,
     credentials: true,
   }
@@ -19,9 +19,9 @@ const corsOptionsDelegate = (req, callback) => {
   const isDomainAllowed = whitelist.indexOf(req.header('Origin')) !== -1;
 
   if(isDomainAllowed) {
-    corsOption.origin = true;
+    corsOptions.origin = true;
   } else {
-    corsOption.origin = false;
+    corsOptions.origin = false;
   }
   callback(null, corsOptions);
 }
