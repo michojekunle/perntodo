@@ -10,15 +10,20 @@ const pool = require('./db');
 
 const whitelist = ['http://localhost:3000', 'https://perntodo-eight.vercel.app']
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-  credentials: true,
+const corsOptionsDelegate = (req, callback) => {
+  let corsOption = {
+    origin: true,
+    credentials: true,
+  }
+  
+  const isDomainAllowed = whitelist.indexOf(req.header('Origin') !== -1;
+
+  if(isDomainAllowed) {
+    corsOption.origin = true;
+  } else {
+    corsOption.origin = false;
+  }
+  callback(null, corsOptions);
 }
 
 const MAX_AGE = 1000 * 60 * 60 * 3;
@@ -34,7 +39,7 @@ app.use(session({
 
 
 // app.use(cors(corsOptions));
-app.use(cors(corsOptions));
+app.use(cors(corsOptionsDelegate);
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
