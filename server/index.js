@@ -16,7 +16,7 @@ const corsOptionsDelegate = (req, callback) => {
     credentials: true,
   }
   
-  const isDomainAllowed = whitelist.indexOf(req.header('Origin') !== -1;
+  const isDomainAllowed = whitelist.indexOf(req.header('Origin')) !== -1;
 
   if(isDomainAllowed) {
     corsOption.origin = true;
